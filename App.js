@@ -1,21 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
 
 export default function App() {
 
   const [num1, setNum1] = useState("");
   const [num2, setNum2] = useState("");
   const [result, setResult] = useState(null);
+  const [history, setHistory] = useState([]);
 
   const handleAdd = () => {
     const sum = (parseFloat(num1) || 0) + (parseFloat(num2) || 0);
     setResult(sum);
+    const newHistory = `${num1} + ${num2} = ${sum}`;
+    setHistory([...history, newHistory]);
+    setNum1("");
+    setNum2("");
   };
 
   const handleSubtract = () => {
     const difference = (parseFloat(num1) || 0) - (parseFloat(num2) || 0);
     setResult(difference);
+    const newHistory = `${num1} - ${num2} = ${difference}`;
+    setHistory([...history, newHistory]);
+    setNum1("");
+    setNum2("");
   };
 
   return (
@@ -27,7 +36,7 @@ export default function App() {
 
       <TextInput
         style={styles.input}
-        placeholder="Anna ensimmäinen numero"
+        placeholder="Anna numero"
         keyboardType="numeric"
         value={num1}
         onChangeText={setNum1}
@@ -35,7 +44,7 @@ export default function App() {
 
       <TextInput
         style={styles.input}
-        placeholder="Anna toinen numero"
+        placeholder="Anna numero"
         keyboardType="numeric"
         value={num2}
         onChangeText={setNum2}
@@ -46,6 +55,12 @@ export default function App() {
         <Button title="-" onPress={handleSubtract} />
       </View>
 
+      <Text style={styles.historyTitle}>History</Text>
+
+      <FlatList
+        data={history} renderItem={({item}) => <Text style={styles.historyItem}>{item}</Text>}
+      />
+
     </View>
   );
 }
@@ -55,7 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 80,
     padding: 20,
   },
 
@@ -80,6 +95,18 @@ const styles = StyleSheet.create({
   result: {
     fontSize: 18,
     fontWeight: "bold",
+    paddingBottom: 10,
+  },
+
+   historyTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 30,
+  },
+
+  historyItem: {
+    fontSize: 16,
+    paddingVertical: 2,
   },
 
 });

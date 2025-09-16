@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.ENSIMMAINEN-APPI"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,6 +25,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "98cfb2cf-a7e7-4e18-981f-9c6d6e50e718"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/98cfb2cf-a7e7-4e18-981f-9c6d6e50e718"
     }
   }
 }
